@@ -4,3 +4,5 @@
 2. Instalar la variable entorno: py -m pip install --user virtualenv
 3. Activarla: .\venv\Scripts\activate
 4. Dentro de (ven), correr el siguiente comando en la raiz del proyecto: pip install requirements.txt
+
+## Evidencias:
