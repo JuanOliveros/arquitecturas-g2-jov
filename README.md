@@ -6,3 +6,5 @@
 4. Dentro de (ven), correr el siguiente comando en la raiz del proyecto: pip install requirements.txt
 
 ## Evidencias:
+1. Ver Vídeo: [Aquí](https://www.youtube.com/watch?v=YQTgIsajFrY&ab_channel=darioherrera).
+2. Descargar el log: [Aquí](https://uniandes-my.sharepoint.com/:x:/g/personal/d_herrerag_uniandes_edu_co/ETHYxCz22-1FpqGx38CHQgYBzqHSmTT_lFZ8VgDzj_Qfcw?e=i8HQRD).
