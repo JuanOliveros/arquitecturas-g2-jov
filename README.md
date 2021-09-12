@@ -31,5 +31,4 @@ Esta conformado por 4 columnas:
   * stopped -> indica que la simulación se detuvo
   * ended -> indica que la simulación ha terminado.
 - INFO: Muestra informacion adicional sobre el evento generado.
-![image](https://user-images.githubusercontent.com/78182559/133006299-3f6d9ed1-0ec5-40c1-8472-f6e89b027158.png)
 
