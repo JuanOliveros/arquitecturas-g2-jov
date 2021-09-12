@@ -11,3 +11,25 @@ Nota: Realizar la ejecución en el sistema operativo ubuntu 20.04
 ## Evidencias:
 1. Ver Vídeo: [Aquí](https://www.youtube.com/watch?v=YQTgIsajFrY&ab_channel=darioherrera).
 2. Descargar el log: [Aquí](https://uniandes-my.sharepoint.com/:x:/g/personal/d_herrerag_uniandes_edu_co/ETHYxCz22-1FpqGx38CHQgYBzqHSmTT_lFZ8VgDzj_Qfcw?e=i8HQRD).
+
+## Explicacion de log de eventos:
+Esta conformado por 4 columnas: 
+- TIME: Estampa de tiempo en la que se registro el evento en el log durante la simulación.
+- NAME: Nombre de los microservicios implicados en la simulación. 
+  * Controller -> Microservicio usado para controlar la simulación. Se encarga de preparar los otros microservicios para la simulación, además de registrar todo lo que ocurre durante esta (genera el log).
+  * Receptor -> Microservicio que simulara al receptor en la dedundancia activa propuesta. Transmite la petición de admisión a los microservisos de admisión.
+  * AdmissionServiceX (para X = [1,3]) -> Microservicios que simularan los módulos de admisones.Procesan la petición de admisión solicitada.
+- FLAG: Esta columna clasifica los eventos generados durante la simulación acorde a su valor, como se describe a continuación:
+  * setup -> Señala un evento asociada a la configuración de la simulación.
+  * running -> Indica que la simulación inicio su ejecución.
+  * request -> Indica que el microservicio Receptor ha generado una petición de admisión a los microserviso de admisión.
+  * received -> Indica que un microservicio de admisión a recibido una solicitud.
+  * working -> indica que un microservicio de admisión esta procesando una solicitud.
+  * success -> Inidica que un microservicio de admisión a procesado una solicitud satisfactoriamente.
+  * error -> Indica un error en el microservicio.
+  * switch -> Indica cuando el Receptor cambio de microservicio principal a uno de respaldo.
+  * stopped -> indica que la simulación se detuvo
+  * ended -> indica que la simulación ha terminado.
+- INFO: Muestra informacion adicional sobre el evento generado.
+![image](https://user-images.githubusercontent.com/78182559/133006299-3f6d9ed1-0ec5-40c1-8472-f6e89b027158.png)
+
