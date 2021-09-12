@@ -1,0 +1,44 @@
+broker:
+  ip: "127.0.0.1"
+  port: 1883
+  username: ""
+  password: ""
+  keep alive: 5
+  tls enabled: False
+topics:
+  request: abc/admin_request
+  success: abc/admin_success
+  events: abc/events
+  commands: abc/commands
+controller:
+  name: Controller
+  app port: 8181
+receptor:
+  name: Receptor
+  app port: 8182
+active redundancy:
+  - name: AdmissionService1
+    priority: 1
+    error:
+      enable: True
+      probability: 0.4
+    app port: 8183
+  - name: AdmissionService2
+    priority: 3
+    error:
+      enable: False
+      probability: 0.2
+    app port: 8184
+  - name: AdmissionService3
+    priority: 2
+    error:
+      enable: False
+      probability: 0.2
+    app port: 8185
+simulation:
+  fail counter:
+    enable: true
+    max: 100
+  request:
+    time: 0.1
+    spended fraction: 0.2
