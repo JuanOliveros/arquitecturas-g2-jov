@@ -19,6 +19,7 @@ with open('config.yaml') as file:
     mqtt = Mqtt()
     mqtt.topic_request = config['topics']['request']
     mqtt.topic_success = config['topics']['success']
+    mqtt.topic_commands = config['topics']['commands']
     mqtt.topic_events = config['topics']['events']
     mqtt.service_name = sys.argv[1]
     mqtt.app_port = int(sys.argv[2])
@@ -53,13 +54,14 @@ def send_success_info(msg):
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe(mqtt.topic_request)
+    mqtt.subscribe(mqtt.topic_commands)
     publish_event("ready", "The service is ready to run.")
 
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
+    msg = json.loads(str(message.payload.decode("utf-8")))
     if message.topic == mqtt.topic_request:
-        msg = json.loads(str(message.payload.decode("utf-8")))
         publish_event(
             "received", f"Admission request for user '{msg['info']['name']}' receved.")
         if mqtt.error and random.random() < mqtt.probability:
@@ -69,6 +71,10 @@ def handle_mqtt_message(client, userdata, message):
             time.sleep(mqtt.working_time)
             publish_event("success", "Admission completed.")
             send_success_info("Admission process completed.")
+    elif msg['flag'] == 'command':
+        raw_command = msg['info']['command']
+        if raw_command == 'die':
+            raise Exception("This is just an error to end the process. Please close this terminal.")
 
 
 if __name__ == '__main__':

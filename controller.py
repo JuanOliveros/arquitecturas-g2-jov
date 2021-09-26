@@ -1,3 +1,4 @@
+from time import sleep
 from flask import Flask
 from flask_mqtt import Mqtt
 import threading
@@ -63,11 +64,11 @@ def publish_command(info):
 
 
 def start_admi_service(service_info_dic):
-    os.system(f"python admi_service.py {service_info_dic['name']} {service_info_dic['app port']} {service_info_dic['error']['enable']} {service_info_dic['error']['probability']} {service_info_dic['priority']}")
+    os.system(f"python3 admi_service.py {service_info_dic['name']} {service_info_dic['app port']} {service_info_dic['error']['enable']} {service_info_dic['error']['probability']} {service_info_dic['priority']}")
 
 
 def start_receptor():
-    os.system("python receptor_service.py")
+    os.system("python3 receptor_service.py")
 
 
 def add_internal_event(flag, info):
@@ -113,10 +114,13 @@ def handle_mqtt_message(client, userdata, message):
                 publish_command({'command': 'set', 'arguments': ['main service', mqtt.main_admi_service[0]]})
                 if mqtt.max_fail_count:
                     publish_command({'command': 'set', 'arguments': ['fail count', mqtt.max_fail_count]})
-                publish_command({'command': 'start', 'arguments': []})
+                publish_command({'command': 'start'})
         elif msg["flag"] == "stopped":
             add_internal_event("ended", "Simulation ended.")
             mqtt.log.save()
+            publish_command({'command': 'die'})
+            sleep(1)
+            raise Exception("This is just an error to end the process. Please close this terminal")
 
 
 

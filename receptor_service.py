@@ -4,6 +4,7 @@ import threading
 import yaml
 import json
 from faker import Faker
+import sys
 
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
@@ -137,6 +138,8 @@ def handle_mqtt_message(client, userdata, message):
                 mqtt.max_fail_count = argument[1]
                 publish_event(
                     "setup", f"Fail counter has been enable. Max: {argument[1]}")
+        elif raw_command == 'die':
+            raise Exception("This is just an error to end the process. Please close this terminal.")
 
 if __name__ == '__main__':
     mqtt.init_app(app)
