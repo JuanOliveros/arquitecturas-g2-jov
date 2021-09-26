@@ -31,4 +31,13 @@ Esta conformado por 4 columnas:
   * stopped -> indica que la simulación se detuvo
   * ended -> indica que la simulación ha terminado.
 - INFO: Muestra informacion adicional sobre el evento generado.
+## Ejecucion en Docker
+1. Construir imagen: ```docker build t lab-miso:1```
+2. Generar contenedor con imagen construida: ```docker run --name lab-exec lab-miso:1```
+3. Esperar hasta que en la consola salga el mensaje "This is just an error to end the process. Please close this terminal." para cerrar la terminal de ejecución.
+4. Extraer log de eventos generado: ```docker cp lab-exec:/app/simulation_log.xlsx .```
+5. Detener ejecucion de contenedor: ```docker stop lab-exec```
 
+Si desea ejecutar el programa con bash interactivo:
+1. Crear seccion interactiva con contenedor: ```docker run -it lab-miso:1 bash```
+2. Ejecutar programa en seccion interactiva: ```./start.sh```
